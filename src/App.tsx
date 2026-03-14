@@ -1,26 +1,59 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Index from "./pages/Index.tsx";
-import NotFound from "./pages/NotFound.tsx";
+import { AuthProvider } from "@/contexts/AuthContext";
+import ProtectedRoute from "@/components/ProtectedRoute";
+import AppLayout from "@/components/AppLayout";
+import LoginPage from "@/pages/LoginPage";
+import DashboardPage from "@/pages/DashboardPage";
+import DevoteesPage from "@/pages/DevoteesPage";
+import ServicesPage from "@/pages/ServicesPage";
+import BookingsPage from "@/pages/BookingsPage";
+import DonationsPage from "@/pages/DonationsPage";
+import EventsPage from "@/pages/EventsPage";
+import TasksPage from "@/pages/TasksPage";
+import InventoryPage from "@/pages/InventoryPage";
+import AssetsPage from "@/pages/AssetsPage";
+import ReportsPage from "@/pages/ReportsPage";
+import SettingsPage from "@/pages/SettingsPage";
+import DonatePage from "@/pages/DonatePage";
+import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <AuthProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/" element={<Navigate to="/login" replace />} />
+
+            <Route element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
+              <Route path="/dashboard" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><DashboardPage /></ProtectedRoute>} />
+              <Route path="/devotees" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><DevoteesPage /></ProtectedRoute>} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/bookings" element={<BookingsPage />} />
+              <Route path="/donations" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><DonationsPage /></ProtectedRoute>} />
+              <Route path="/events" element={<EventsPage />} />
+              <Route path="/tasks" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><TasksPage /></ProtectedRoute>} />
+              <Route path="/inventory" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><InventoryPage /></ProtectedRoute>} />
+              <Route path="/assets" element={<ProtectedRoute allowedRoles={['admin']}><AssetsPage /></ProtectedRoute>} />
+              <Route path="/reports" element={<ProtectedRoute allowedRoles={['admin']}><ReportsPage /></ProtectedRoute>} />
+              <Route path="/settings" element={<ProtectedRoute allowedRoles={['admin']}><SettingsPage /></ProtectedRoute>} />
+              <Route path="/donate" element={<DonatePage />} />
+            </Route>
+
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </AuthProvider>
   </QueryClientProvider>
 );
 

@@ -26,7 +26,8 @@ const TasksPage: React.FC = () => {
     setEditId(item.id); setModalOpen(true);
   };
   const handleSave = () => {
-    if (editId) update(editId, form);
+    if (editId) update(editId, form as any);
+    else add(form as any);
     else add(form as any);
     setModalOpen(false);
   };
