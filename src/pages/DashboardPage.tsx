@@ -14,13 +14,13 @@ import {
 
 const kpis = [
   { label: "Today's Donations", value: '₹1,90,000', icon: Heart, color: 'bg-primary/10 text-primary' },
-  { label: "Today's Bookings", value: '24', icon: CalendarDays, color: 'bg-blue-50 text-blue-600' },
-  { label: 'Total Devotees', value: '2,847', icon: Users, color: 'bg-emerald-50 text-emerald-600' },
-  { label: 'Cash & Bank', value: '₹45,20,000', icon: Wallet, color: 'bg-amber-50 text-amber-600' },
-  { label: 'Revenue (MTD)', value: '₹12,40,000', icon: TrendingUp, color: 'bg-purple-50 text-purple-600' },
-  { label: 'Upcoming Events', value: '4', icon: CalendarCheck, color: 'bg-indigo-50 text-indigo-600' },
-  { label: 'Pending Tasks', value: '7', icon: CheckSquare, color: 'bg-teal-50 text-teal-600' },
-  { label: 'Inventory Alerts', value: '3', icon: AlertTriangle, color: 'bg-red-50 text-red-600' },
+  { label: "Today's Bookings", value: '24', icon: CalendarDays, color: 'bg-secondary/10 text-secondary' },
+  { label: 'Total Devotees', value: '2,847', icon: Users, color: 'bg-accent/10 text-accent' },
+  { label: 'Cash & Bank', value: '₹45,20,000', icon: Wallet, color: 'bg-primary/10 text-primary' },
+  { label: 'Revenue (MTD)', value: '₹12,40,000', icon: TrendingUp, color: 'bg-secondary/10 text-secondary' },
+  { label: 'Upcoming Events', value: '4', icon: CalendarCheck, color: 'bg-accent/10 text-accent' },
+  { label: 'Pending Tasks', value: '7', icon: CheckSquare, color: 'bg-secondary/10 text-secondary' },
+  { label: 'Inventory Alerts', value: '3', icon: AlertTriangle, color: 'bg-destructive/10 text-destructive' },
 ];
 
 const recentActivity = [
@@ -39,50 +39,50 @@ const upcomingEvents = [
 
 const pendingApprovals = [
   { text: 'Leave request - Pandit Verma', type: 'Leave' },
-  { text: 'Maintenance - Generator servicing', type: 'Maintenance' },
-  { text: 'Hundi opening log - March 13', type: 'Audit' },
+  { text: 'Generator servicing', type: 'Maintenance' },
+  { text: 'Hundi opening - March 13', type: 'Audit' },
 ];
 
 const DashboardPage: React.FC = () => {
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       <h1 className="text-2xl font-display font-bold text-foreground">Dashboard</h1>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 animate-stagger">
         {kpis.map(kpi => (
           <div key={kpi.label} className="kpi-card">
             <div className={`kpi-icon ${kpi.color}`}>
               <kpi.icon className="h-5 w-5" />
             </div>
-            <div>
-              <p className="text-sm text-muted-foreground">{kpi.label}</p>
-              <p className="text-xl font-display font-bold text-foreground">{kpi.value}</p>
+            <div className="min-w-0">
+              <p className="text-xs text-muted-foreground truncate">{kpi.label}</p>
+              <p className="text-lg font-display font-bold text-foreground">{kpi.value}</p>
             </div>
           </div>
         ))}
       </div>
 
       {/* Charts Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 erp-card">
-          <h3 className="text-base font-semibold text-foreground mb-4">Donation Trend</h3>
-          <ResponsiveContainer width="100%" height={280}>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className="lg:col-span-2 erp-card !p-4">
+          <h3 className="text-sm font-semibold text-foreground mb-3">Donation Trend</h3>
+          <ResponsiveContainer width="100%" height={220}>
             <LineChart data={donationTrendData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(40, 15%, 90%)" />
-              <XAxis dataKey="month" fontSize={12} />
-              <YAxis fontSize={12} tickFormatter={v => `₹${(v/1000)}k`} />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(40, 12%, 90%)" />
+              <XAxis dataKey="month" fontSize={11} tickLine={false} axisLine={false} />
+              <YAxis fontSize={11} tickLine={false} axisLine={false} tickFormatter={v => `₹${(v/1000)}k`} />
               <Tooltip formatter={(v: number) => `₹${v.toLocaleString()}`} />
-              <Line type="monotone" dataKey="amount" stroke="hsl(1, 76%, 52%)" strokeWidth={2.5} dot={{ r: 4 }} />
+              <Line type="monotone" dataKey="amount" stroke="hsl(1, 76%, 52%)" strokeWidth={2} dot={{ r: 3 }} />
             </LineChart>
           </ResponsiveContainer>
         </div>
 
-        <div className="erp-card">
-          <h3 className="text-base font-semibold text-foreground mb-4">Donation Categories</h3>
-          <ResponsiveContainer width="100%" height={280}>
+        <div className="erp-card !p-4">
+          <h3 className="text-sm font-semibold text-foreground mb-3">Donation Categories</h3>
+          <ResponsiveContainer width="100%" height={220}>
             <PieChart>
-              <Pie data={donationCategoryData} cx="50%" cy="50%" outerRadius={90} dataKey="value" label={({ name, value }) => `${name} ${value}%`}>
+              <Pie data={donationCategoryData} cx="50%" cy="50%" outerRadius={75} innerRadius={40} dataKey="value" label={({ name, value }) => `${name} ${value}%`} labelLine={false}>
                 {donationCategoryData.map((entry, i) => (
                   <Cell key={i} fill={entry.color} />
                 ))}
@@ -94,29 +94,29 @@ const DashboardPage: React.FC = () => {
       </div>
 
       {/* Second Charts Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="erp-card">
-          <h3 className="text-base font-semibold text-foreground mb-4">Service Bookings</h3>
-          <ResponsiveContainer width="100%" height={250}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="erp-card !p-4">
+          <h3 className="text-sm font-semibold text-foreground mb-3">Service Bookings</h3>
+          <ResponsiveContainer width="100%" height={200}>
             <BarChart data={serviceBookingData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(40, 15%, 90%)" />
-              <XAxis dataKey="service" fontSize={12} />
-              <YAxis fontSize={12} />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(40, 12%, 90%)" />
+              <XAxis dataKey="service" fontSize={11} tickLine={false} axisLine={false} />
+              <YAxis fontSize={11} tickLine={false} axisLine={false} />
               <Tooltip />
               <Bar dataKey="bookings" fill="hsl(233, 53%, 35%)" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
-        <div className="erp-card">
-          <h3 className="text-base font-semibold text-foreground mb-4">Inventory Usage</h3>
-          <ResponsiveContainer width="100%" height={250}>
+        <div className="erp-card !p-4">
+          <h3 className="text-sm font-semibold text-foreground mb-3">Inventory Usage</h3>
+          <ResponsiveContainer width="100%" height={200}>
             <BarChart data={inventoryUsageData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(40, 15%, 90%)" />
-              <XAxis dataKey="item" fontSize={12} />
-              <YAxis fontSize={12} />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(40, 12%, 90%)" />
+              <XAxis dataKey="item" fontSize={11} tickLine={false} axisLine={false} />
+              <YAxis fontSize={11} tickLine={false} axisLine={false} />
               <Tooltip />
-              <Legend />
+              <Legend iconSize={10} wrapperStyle={{ fontSize: '11px' }} />
               <Bar dataKey="used" fill="hsl(270, 43%, 32%)" radius={[4, 4, 0, 0]} />
               <Bar dataKey="remaining" fill="hsl(40, 70%, 50%)" radius={[4, 4, 0, 0]} />
             </BarChart>
@@ -125,41 +125,41 @@ const DashboardPage: React.FC = () => {
       </div>
 
       {/* Bottom Panels */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="erp-card">
-          <h3 className="text-base font-semibold text-foreground mb-4">Recent Activity</h3>
-          <div className="space-y-3">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className="erp-card !p-4">
+          <h3 className="text-sm font-semibold text-foreground mb-3">Recent Activity</h3>
+          <div className="space-y-2.5">
             {recentActivity.map((a, i) => (
-              <div key={i} className="flex items-start gap-3">
-                <div className="w-2 h-2 rounded-full bg-primary mt-1.5 shrink-0" />
+              <div key={i} className="flex items-start gap-2.5">
+                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                 <div>
-                  <p className="text-sm text-foreground">{a.text}</p>
-                  <p className="text-xs text-muted-foreground">{a.time}</p>
+                  <p className="text-xs text-foreground leading-snug">{a.text}</p>
+                  <p className="text-[10px] text-muted-foreground">{a.time}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="erp-card">
-          <h3 className="text-base font-semibold text-foreground mb-4">Pending Approvals</h3>
-          <div className="space-y-3">
+        <div className="erp-card !p-4">
+          <h3 className="text-sm font-semibold text-foreground mb-3">Pending Approvals</h3>
+          <div className="space-y-2">
             {pendingApprovals.map((a, i) => (
-              <div key={i} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                <p className="text-sm text-foreground">{a.text}</p>
-                <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">{a.type}</span>
+              <div key={i} className="flex items-center justify-between p-2.5 bg-muted/50 rounded-lg">
+                <p className="text-xs text-foreground">{a.text}</p>
+                <span className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">{a.type}</span>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="erp-card">
-          <h3 className="text-base font-semibold text-foreground mb-4">Upcoming Events</h3>
-          <div className="space-y-3">
+        <div className="erp-card !p-4">
+          <h3 className="text-sm font-semibold text-foreground mb-3">Upcoming Events</h3>
+          <div className="space-y-2">
             {upcomingEvents.map((e, i) => (
-              <div key={i} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                <p className="text-sm font-medium text-foreground">{e.name}</p>
-                <span className="text-xs text-muted-foreground">{e.date}</span>
+              <div key={i} className="flex items-center justify-between p-2.5 bg-muted/50 rounded-lg">
+                <p className="text-xs font-medium text-foreground">{e.name}</p>
+                <span className="text-[10px] text-muted-foreground">{e.date}</span>
               </div>
             ))}
           </div>
