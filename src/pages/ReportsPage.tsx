@@ -3,18 +3,18 @@ import { Button } from '@/components/ui/button';
 import { FileText, Download } from 'lucide-react';
 
 const reportTypes = [
-  { id: 'donations', title: 'Donation Reports', description: 'Detailed donation history and analytics' },
-  { id: 'devotees', title: 'Devotee Reports', description: 'Devotee registration and engagement data' },
-  { id: 'bookings', title: 'Service Booking Reports', description: 'Service booking trends and revenue' },
-  { id: 'inventory', title: 'Inventory Reports', description: 'Stock usage, alerts, and supplier data' },
+  { id: 'donations', title: 'Donation Document', description: 'Detailed donation history and analytics' },
+  { id: 'devotees', title: 'Devotee Document', description: 'Devotee registration and engagement data' },
+  { id: 'bookings', title: 'Service Booking Document', description: 'Service booking trends and revenue' },
+  { id: 'inventory', title: 'Inventory Document', description: 'Stock usage, alerts, and supplier data' },
 ];
 
-const ReportsPage: React.FC = () => {
+const DocumentPage: React.FC = () => {
   const [selected, setSelected] = useState('donations');
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-display font-bold text-foreground">Reports</h1>
+      <h1 className="text-2xl font-display font-bold text-foreground">Document</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {reportTypes.map(r => (
@@ -61,4 +61,4 @@ const ReportsPage: React.FC = () => {
   );
 };
 
-export default ReportsPage;
+export default DocumentPage;

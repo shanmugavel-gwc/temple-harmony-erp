@@ -35,7 +35,6 @@ const DonatePage: React.FC = () => {
   return (
     <div className="max-w-lg mx-auto">
       <div className="text-center mb-8">
-        <img src={omgLogo} alt="OMG Temple" className="h-12 mx-auto mb-3" />
         <h1 className="text-2xl font-display font-bold text-foreground">Make a Donation</h1>
         <p className="text-muted-foreground">Support OMG Temple with your generous contribution</p>
       </div>

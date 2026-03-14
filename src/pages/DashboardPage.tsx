@@ -16,7 +16,7 @@ const kpis = [
   { label: "Today's Donations", value: '₹1,90,000', icon: Heart, color: 'bg-primary/10 text-primary' },
   { label: "Today's Bookings", value: '24', icon: CalendarDays, color: 'bg-secondary/10 text-secondary' },
   { label: 'Total Devotees', value: '2,847', icon: Users, color: 'bg-accent/10 text-accent' },
-  { label: 'Cash & Bank', value: '₹45,20,000', icon: Wallet, color: 'bg-primary/10 text-primary' },
+  // { label: 'Cash & Bank', value: '₹45,20,000', icon: Wallet, color: 'bg-primary/10 text-primary' },
   { label: 'Revenue (MTD)', value: '₹12,40,000', icon: TrendingUp, color: 'bg-secondary/10 text-secondary' },
   { label: 'Upcoming Events', value: '4', icon: CalendarCheck, color: 'bg-accent/10 text-accent' },
   { label: 'Pending Tasks', value: '7', icon: CheckSquare, color: 'bg-secondary/10 text-secondary' },

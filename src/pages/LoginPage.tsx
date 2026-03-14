@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Heart } from 'lucide-react';
+import bg from '@/assets/img/kasi-temple.jpeg';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('admin@omgtemple.com');
@@ -23,20 +24,14 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="min-h-screen flex bg-background">
-      {/* Left decorative panel */}
-      <div className="hidden lg:flex lg:w-1/2 bg-secondary relative overflow-hidden items-center justify-center">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-20 w-64 h-64 rounded-full border border-secondary-foreground/20" />
-          <div className="absolute bottom-32 right-16 w-48 h-48 rounded-full border border-secondary-foreground/20" />
-          <div className="absolute top-1/2 left-1/3 w-32 h-32 rounded-full border border-secondary-foreground/20" />
-        </div>
-        <div className="relative z-10 text-center text-secondary-foreground px-12 animate-fade-in">
-          <Heart className="h-16 w-16 mx-auto mb-6 opacity-80" />
-          <h2 className="text-3xl font-display font-bold mb-3">OMG Temple</h2>
-          <p className="text-secondary-foreground/70 text-lg leading-relaxed">
-            Manage devotees, services, donations & temple operations — all in one place.
-          </p>
-        </div>
+      {/* Left side with image */}
+      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
+        <img 
+          src={bg} // Replace with your actual image path
+          alt="Temple"
+          className="w-full h-full object-cover"
+        />
+      
       </div>
 
       {/* Right login form */}

@@ -6,7 +6,7 @@ import {
   CalendarCheck, CheckSquare, Package, Building2, BarChart3,
   Settings, LogOut
 } from 'lucide-react';
-import omgLogo from '@/assets/omg-logo.png';
+import omgLogo from '@/assets/img/logo.svg';
 
 const adminLinks = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -18,7 +18,7 @@ const adminLinks = [
   { to: '/tasks', label: 'Tasks', icon: CheckSquare },
   { to: '/inventory', label: 'Inventory', icon: Package },
   { to: '/assets', label: 'Assets', icon: Building2 },
-  { to: '/reports', label: 'Reports', icon: BarChart3 },
+  { to: '/reports', label: 'Documents', icon: BarChart3 },
   { to: '/settings', label: 'Settings', icon: Settings },
 ];
 
@@ -45,7 +45,7 @@ const AppSidebar: React.FC = () => {
   return (
     <aside className="w-64 bg-secondary text-secondary-foreground flex flex-col min-h-screen shrink-0">
       <div className="p-5 border-b border-sidebar-border">
-        <img src={omgLogo} alt="OMG Temple" className="h-10 brightness-0 invert" />
+        <img src={omgLogo} alt="OMG Temple" className="h-[50px]  bg-white object-contain px-4  rounded-md" />
       </div>
 
       <nav className="flex-1 py-4 px-3 space-y-1 overflow-y-auto">

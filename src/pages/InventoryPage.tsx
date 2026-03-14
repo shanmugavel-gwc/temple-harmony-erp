@@ -10,6 +10,21 @@ import StatusBadge from '@/components/StatusBadge';
 
 const emptyForm = { name: '', category: '', quantity: 0, unit: '', stockStatus: 'In Stock', supplier: '' };
 
+const MAX_QUANTITY: Record<string, number> = {
+  default: 100,
+};
+
+function getStockPercent(quantity: number, name: string): number {
+  const max = MAX_QUANTITY[name] ?? MAX_QUANTITY.default;
+  return Math.min(100, Math.round((quantity / max) * 100));
+}
+
+function getProgressColor(pct: number): string {
+  if (pct === 0) return 'bg-red-500';
+  if (pct < 30) return 'bg-amber-400';
+  return 'bg-emerald-500';
+}
+
 const InventoryPage: React.FC = () => {
   const { items, add, update, remove } = useStore(mockInventory);
   const [modalOpen, setModalOpen] = useState(false);
@@ -43,24 +58,40 @@ const InventoryPage: React.FC = () => {
             <th className="text-right p-4 font-medium text-muted-foreground">Quantity</th>
             <th className="text-left p-4 font-medium text-muted-foreground">Unit</th>
             <th className="text-left p-4 font-medium text-muted-foreground">Stock</th>
+            <th className="text-left p-4 font-medium text-muted-foreground">Stock Level</th>
             <th className="text-right p-4 font-medium text-muted-foreground">Actions</th>
           </tr></thead>
           <tbody>
-            {items.map(i => (
-              <tr key={i.id} className="border-b border-border hover:bg-muted/30 transition-colors">
-                <td className="p-4 font-medium text-foreground">{i.name}</td>
-                <td className="p-4 text-muted-foreground">{i.category}</td>
-                <td className="p-4 text-right text-foreground">{i.quantity}</td>
-                <td className="p-4 text-muted-foreground">{i.unit}</td>
-                <td className="p-4"><StatusBadge status={i.stockStatus} /></td>
-                <td className="p-4 text-right">
-                  <div className="flex gap-1 justify-end">
-                    <Button variant="ghost" size="icon" onClick={() => openEdit(i)}><Pencil className="h-4 w-4" /></Button>
-                    <Button variant="ghost" size="icon" onClick={() => setDeleteId(i.id)}><Trash2 className="h-4 w-4 text-destructive" /></Button>
-                  </div>
-                </td>
-              </tr>
-            ))}
+            {items.map(i => {
+              const pct = getStockPercent(i.quantity, i.name);
+              const barColor = getProgressColor(pct);
+              return (
+                <tr key={i.id} className="border-b border-border hover:bg-muted/30 transition-colors">
+                  <td className="p-4 font-medium text-foreground">{i.name}</td>
+                  <td className="p-4 text-muted-foreground">{i.category}</td>
+                  <td className="p-4 text-right text-foreground">{i.quantity}</td>
+                  <td className="p-4 text-muted-foreground">{i.unit}</td>
+                  <td className="p-4"><StatusBadge status={i.stockStatus} /></td>
+                  <td className="p-4">
+                    <div className="flex items-center gap-2">
+                      <div className="w-24 h-2 rounded-full bg-muted overflow-hidden">
+                        <div
+                          className={`h-2 rounded-full transition-all ${barColor}`}
+                          style={{ width: `${pct}%` }}
+                        />
+                      </div>
+                      <span className="text-xs text-muted-foreground">{pct}%</span>
+                    </div>
+                  </td>
+                  <td className="p-4 text-right">
+                    <div className="flex gap-1 justify-end">
+                      <Button variant="ghost" size="icon" onClick={() => openEdit(i)}><Pencil className="h-4 w-4" /></Button>
+                      <Button variant="ghost" size="icon" onClick={() => setDeleteId(i.id)}><Trash2 className="h-4 w-4 text-destructive" /></Button>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div></div>

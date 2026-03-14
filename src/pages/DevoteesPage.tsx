@@ -73,17 +73,17 @@ const DevoteesPage: React.FC = () => {
       </div>
 
       <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={editId ? 'Edit Devotee' : 'Add Devotee'}>
-        <div className="space-y-4">
+        <div className="grid grid-cols-2 gap-4">
           <FormField label="Name" value={form.name} onChange={v => set('name', v)} required />
           <FormField label="Phone" value={form.phone} onChange={v => set('phone', v)} />
           <FormField label="Email" value={form.email} onChange={v => set('email', v)} type="email" />
           <FormField label="Address" value={form.address} onChange={v => set('address', v)} />
-          <div className="grid grid-cols-2 gap-4">
+          <div className="col-span-2 grid grid-cols-2 gap-4">
             <FormField label="City" value={form.city} onChange={v => set('city', v)} />
             <FormField label="State" value={form.state} onChange={v => set('state', v)} />
           </div>
           <FormField label="Country" value={form.country} onChange={v => set('country', v)} />
-          <div className="flex gap-3 pt-2">
+          <div className="col-span-2 flex gap-3 pt-2">
             <Button variant="outline" onClick={() => setModalOpen(false)} className="flex-1">Cancel</Button>
             <Button onClick={handleSave} className="flex-1">Save</Button>
           </div>
