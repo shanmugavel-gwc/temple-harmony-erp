@@ -8,7 +8,7 @@ import ConfirmDialog from '@/components/ConfirmDialog';
 import FormField from '@/components/FormField';
 import StatusBadge from '@/components/StatusBadge';
 
-const emptyForm = { name: '', assignedTo: '', dueDate: '', time: '', status: 'Pending', type: 'general' as const };
+const emptyForm = { name: '', assignedTo: '', dueDate: '', time: '', status: 'Pending', type: 'general' as string };
 
 const TasksPage: React.FC = () => {
   const { items, add, update, remove } = useStore(mockTasks);
