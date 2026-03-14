@@ -7,7 +7,7 @@ import {
   Settings, LogOut
 } from 'lucide-react';
 
-import logo from '@/assets/img/logo.svg';
+import logo from '@/assets/img/logo.png'; 
 
 const adminLinks = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -47,7 +47,7 @@ const AppSidebar: React.FC = () => {
     <aside className="w-64 bg-secondary text-secondary-foreground flex flex-col min-h-screen shrink-0">
       <div className="p-5 border-b border-sidebar-border">
         <img 
-  src="/logo.svg" 
+  src={logo} 
   alt="OMG Temple" 
   className="h-[50px] object-contain bg-white px-4 rounded-md" 
 />
