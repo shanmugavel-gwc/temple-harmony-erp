@@ -46,7 +46,11 @@ const AppSidebar: React.FC = () => {
   return (
     <aside className="w-64 bg-secondary text-secondary-foreground flex flex-col min-h-screen shrink-0">
       <div className="p-5 border-b border-sidebar-border">
-        <img src={logo} alt="OMG Temple" className="h-[50px]   object-contain" />
+        <img 
+  src="/logo.svg" 
+  alt="OMG Temple" 
+  className="h-[50px] object-contain bg-white px-4 rounded-md" 
+/>
       </div>
 
       <nav className="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
