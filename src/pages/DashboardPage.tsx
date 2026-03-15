@@ -82,7 +82,7 @@ const DashboardPage: React.FC = () => {
           <h3 className="text-sm font-semibold text-foreground mb-3">Donation Categories</h3>
           <ResponsiveContainer width="100%" height={220}>
             <PieChart>
-              <Pie data={donationCategoryData} cx="50%" cy="50%" outerRadius={75} innerRadius={40} dataKey="value" label={({ name, value }) => `${name} ${value}%`} labelLine={false}>
+              <Pie data={donationCategoryData} cx="50%" cy="50%" fontSize={12} outerRadius={75} innerRadius={40} dataKey="value" label={({ name, value }) => `${name} ${value}%`} labelLine={false}>
                 {donationCategoryData.map((entry, i) => (
                   <Cell key={i} fill={entry.color} />
                 ))}

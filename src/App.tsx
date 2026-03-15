@@ -20,6 +20,8 @@ import ReportsPage from "@/pages/ReportsPage";
 import SettingsPage from "@/pages/SettingsPage";
 import DonatePage from "@/pages/DonatePage";
 import NotFound from "@/pages/NotFound";
+import HrPage from "@/pages/HrPage";
+import ProcurementPage from "@/pages/ProcurementPage";
 
 const queryClient = new QueryClient();
 
@@ -42,10 +44,12 @@ const App = () => (
               <Route path="/donations" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><DonationsPage /></ProtectedRoute>} />
               <Route path="/events" element={<EventsPage />} />
               <Route path="/tasks" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><TasksPage /></ProtectedRoute>} />
+              <Route path="/procurement" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><ProcurementPage /></ProtectedRoute>} />
               <Route path="/inventory" element={<ProtectedRoute allowedRoles={['admin', 'manager']}><InventoryPage /></ProtectedRoute>} />
               <Route path="/assets" element={<ProtectedRoute allowedRoles={['admin']}><AssetsPage /></ProtectedRoute>} />
               <Route path="/reports" element={<ProtectedRoute allowedRoles={['admin']}><ReportsPage /></ProtectedRoute>} />
               <Route path="/settings" element={<ProtectedRoute allowedRoles={['admin']}><SettingsPage /></ProtectedRoute>} />
+              <Route path="/hr" element={<ProtectedRoute allowedRoles={['admin']}><HrPage /></ProtectedRoute>} />
               <Route path="/donate" element={<DonatePage />} />
             </Route>
 

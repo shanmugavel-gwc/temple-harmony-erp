@@ -5,17 +5,19 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Heart } from 'lucide-react';
-import bg from '@/assets/img/kasi-temple.jpeg';
+import bg from '@/assets/img/temple.webp';
 
 const LoginPage: React.FC = () => {
-  const [email, setEmail] = useState('admin@omgtemple.com');
-  const [password, setPassword] = useState('password');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [role, setRole] = useState<UserRole>('admin');
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Always attempt login regardless of field values
     const success = login(email, password, role);
     if (success) {
       navigate(role === 'devotee' ? '/donate' : '/dashboard');
@@ -25,14 +27,13 @@ const LoginPage: React.FC = () => {
   return (
     <div className="min-h-screen flex bg-background">
       {/* Left side with image */}
-      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
-        <img 
-          src={bg} // Replace with your actual image path
-          alt="Temple"
-          className="w-full h-full object-cover"
-        />
-      
-      </div>
+      <div className="hidden lg:flex lg:w-1/2 relative">
+  <img
+    src={bg}
+    alt="Temple"
+    className="absolute inset-0 w-full h-full object-cover"
+  />
+</div>
 
       {/* Right login form */}
       <div className="flex-1 flex items-center justify-center p-6">
@@ -62,7 +63,12 @@ const LoginPage: React.FC = () => {
 
             <div className="space-y-1.5">
               <Label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Email</Label>
-              <Input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
+              <Input 
+                type="email" 
+                value={email} 
+                onChange={e => setEmail(e.target.value)} 
+                placeholder="Enter your email"
+              />
             </div>
 
             <div className="space-y-1.5">
@@ -70,11 +76,18 @@ const LoginPage: React.FC = () => {
                 <Label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">Password</Label>
                 <button type="button" className="text-xs text-primary hover:underline">Forgot?</button>
               </div>
-              <Input type="password" value={password} onChange={e => setPassword(e.target.value)} required />
+              <Input 
+                type="password" 
+                value={password} 
+                onChange={e => setPassword(e.target.value)} 
+                placeholder="Enter your password"
+              />
             </div>
 
             <Button type="submit" className="w-full h-11 font-medium">Sign In</Button>
           </form>
+          
+        
         </div>
       </div>
     </div>

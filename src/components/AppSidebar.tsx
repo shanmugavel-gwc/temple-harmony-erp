@@ -3,8 +3,8 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import {
   LayoutDashboard, Users, BookOpen, CalendarDays, Heart,
-  CalendarCheck, CheckSquare, Package, Building2, BarChart3,
-  Settings, LogOut
+  CalendarCheck, CheckSquare, Package, Building2, BarChart3,Briefcase,
+  Settings, LogOut,ShoppingCart 
 } from 'lucide-react';
 
 import logo from '@/assets/img/logo.png'; 
@@ -14,7 +14,9 @@ const adminLinks = [
   { to: '/devotees', label: 'Devotees', icon: Users },
   { to: '/services', label: 'Services', icon: BookOpen },
   { to: '/bookings', label: 'Bookings', icon: CalendarDays },
-  { to: '/donations', label: 'Donations', icon: Heart },
+  { to: '/hr', label: 'HR', icon: Briefcase},
+  { to: '/procurement', label: 'Procurement', icon: ShoppingCart},
+  { to: '/donations', label: 'Donations', icon: ShoppingCart  },
   { to: '/events', label: 'Events & Calendar', icon: CalendarCheck },
   { to: '/tasks', label: 'Tasks', icon: CheckSquare },
   { to: '/inventory', label: 'Inventory', icon: Package },
